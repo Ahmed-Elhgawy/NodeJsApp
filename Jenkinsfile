@@ -16,8 +16,8 @@ pipeline {
 
         stage('app provisionning') {
             steps {
-                sh "kubectl apply -f deployment/deployment.yml"
-                sh "kubectl apply -f deployment/service.yml"
+                sh "kubectl apply -f deployment/deployment.yaml"
+                sh "kubectl apply -f deployment/service.yaml"
             }
         }
         
