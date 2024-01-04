@@ -10,7 +10,7 @@ pipeline {
                 withCredentials([usernamePassword(credentialsId: 'Docker', passwordVariable: 'PASSWD', usernameVariable: 'USER')]) {
                     sh "docker login -u $USER -p $PASSWD"
                 }
-                sh "docker push"                
+                sh "docker push elhgawy/node:app"                
             }
         }
 
