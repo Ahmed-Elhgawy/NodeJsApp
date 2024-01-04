@@ -8,7 +8,7 @@ pipeline {
                 sh 'docker build . -t node:app'
                 sh 'docker tag node:app elhgawy/node:app'
                 withCredentials([usernamePassword(credentialsId: 'Docker', passwordVariable: 'PASSWD', usernameVariable: 'USER')]) {
-                    sh 'docker login -u USER -p PASSWD'
+                    sh 'docker login -u $USER -p $PASSWD'
                 }
                 sh 'docker push'                
             }
