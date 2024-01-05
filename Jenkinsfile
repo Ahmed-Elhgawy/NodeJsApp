@@ -22,5 +22,16 @@ pipeline {
         }
         
     }
+
+    post {
+
+        success {
+            slackSend color: 'good', message: 'App deployed to cluster successfully', tokenCredentialId: 'Slack'
+        }
+
+        failure {
+            slackSend color: 'danger', message: 'App failed to be deployed to cluster', tokenCredentialId: 'Slack'
+        }
+    }
     
 }
