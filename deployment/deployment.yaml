@@ -3,6 +3,7 @@ kind: Deployment
 metadata:
   name: nodejs-app
 spec:
+  replica: 2
   selector:
     matchLabels:
       app: nodejs-app
