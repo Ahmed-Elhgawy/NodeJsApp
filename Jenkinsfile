@@ -1,20 +1,30 @@
 pipeline {
-    agent {label "kubeagant"}
+    agent any
 
     stages{
+       stage('login to docker repo') {
+            steps {
+                withCredentials([usernamePassword(credentialsId: 'Docker', passwordVariable: 'PASSWD', usernameVariable: 'USER')]) {
+                    sh "docker login -u $USER -p $PASSWD"
+                }               
+            }
+        }
 
-       stage('make docker image') {
+       stage('build docker image') {
             steps {
                 sh "docker build . -t node:app"
                 sh "docker tag node:app elhgawy/node:app"
-                withCredentials([usernamePassword(credentialsId: 'Docker', passwordVariable: 'PASSWD', usernameVariable: 'USER')]) {
-                    sh "docker login -u $USER -p $PASSWD"
-                }
                 sh "docker push elhgawy/node:app"                
             }
         }
 
-        stage('app provisionning') {
+        stage('push docker image to repo') {
+            steps {
+                sh "docker push elhgawy/node:app"                
+            }
+        }
+
+        stage('app provisionning on cluster') {
             steps {
                 sh "kubectl apply -f deployment/deployment.yaml"
                 sh "kubectl apply -f deployment/service.yaml"
