@@ -12,3 +12,7 @@ Credential needed:
 2. buid docker image
 3. push docker image to repo
 4. deploy application on cluster
+
+## Build EKS Cluster and deploy jenkins in same cluster 👇👇
+
+### [Deploying Appliction on EKS cluster using jenkins pipeline](https://github.com/Ahmed-Elhgawy/aws-k8s-jenkins.git)
